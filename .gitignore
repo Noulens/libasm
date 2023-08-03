@@ -1,5 +1,6 @@
 #other
 .idea
+try_libasm
 
 # Prerequisites
 *.d
