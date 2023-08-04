@@ -17,8 +17,9 @@ clean	:
 
 fclean	:	clean
 			rm -f ${NAME}
+			rm -f try_libasm
 
 re		:	fclean all
 
-try		:	all
+test	:	all
 			gcc ${FLAG} -I. libasm.h -o try_libasm main.c -L. -lasm -g
