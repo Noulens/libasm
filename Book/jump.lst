@@ -1,0 +1,33 @@
+     1                                  ;jump
+     2                                  section .data
+     3 00000000 2A00000000000000        	nb1 dq 42
+     4 00000008 2900000000000000        	nb2 dq 41
+     5 00000010 6E6231203E206E6232-     	str1 db "nb1 > nb2", 10, 0
+     5 00000019 0A00               
+     6 0000001B 6E6232203E206E6231-     	str2 db "nb2 > nb1", 10, 0
+     6 00000024 0A00               
+     7                                  section .bss
+     8                                  section .text
+     9                                  	global main
+    10                                  	extern printf
+    11                                  main:
+    12 00000000 55                      	push rbp
+    13 00000001 4889E5                  	mov rbp, rsp
+    14 00000004 488B0425[00000000]      	mov rax, [nb1]
+    15 0000000C 488B1C25[08000000]      	mov rbx, [nb2]
+    16 00000014 4839D8                  	cmp rax, rbx
+    17 00000017 7D16                    	jge greater
+    18 00000019 48BF-                   	mov rdi, str2
+    18 0000001B [1B00000000000000] 
+    19 00000023 B800000000              	mov rax, 0
+    20 00000028 E8(00000000)            	call printf
+    21 0000002D EB14                    	jmp exit
+    22                                  greater:
+    23 0000002F 48BF-                   	mov rdi, str1
+    23 00000031 [1000000000000000] 
+    24 00000039 B800000000              	mov rax, 0
+    25 0000003E E8(00000000)            	call printf
+    26                                  exit:
+    27 00000043 4889EC                  	mov rsp, rbp
+    28 00000046 5D                      	pop rbp
+    29 00000047 C20000                  	ret 0
