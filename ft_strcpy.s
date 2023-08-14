@@ -1,19 +1,20 @@
 ;ft_strcpy
+section .note.GNU-stack
 section .data
 section .bss
 section .text
 global ft_strcpy
 ft_strcpy:
-	xor rax,    rax
-	xor bl,     bl
-loop:
+	xor rax, rax
+	xor bl, bl
+.loop:
 	mov bl, [rsi + rax]
 	mov [rdi + rax], bl
 	inc rax
 	cmp byte bl, 0
-	je  done
-	jmp loop
-done:
+	je  .done
+	jmp .loop
+.done:
 	xor rax, rax
 	mov rax, rdi
 	ret

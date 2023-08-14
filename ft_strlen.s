@@ -1,14 +1,15 @@
 ;ft_strlen
+section .note.GNU-stack
 section .data
 section .bss
 section .text
 global  ft_strlen
 ft_strlen:
 	xor rax, rax
-loop:
+.loop:
 	cmp byte [rdi + rax], 0
-	je  done
+	je  .done
 	inc rax
-	jmp loop
-done:
+	jmp .loop
+.done:
 	ret
