@@ -1,3 +1,4 @@
+FLAGS
 je  ZF=1                    Jump if	equal              Signed,	unsigned
 jne ZF=0                    Jump if	not	equal          Signed,	unsigned
 jg  ((SF XOR OF) OR ZF)	= 0 Jump if	greater            Signed
@@ -8,3 +9,15 @@ ja  (CF OR ZF) = 0          Jump if	above Unsigned
 jae CF=0                    Jump if above or equal     Unsigned
 jb  CF=1                    Jump if lesser             Unsigned
 jbe (CF	OR	ZF)	=	1       Jump if lesser or equal    Unsigned
+
+CALLING CONVENTION
+; 1st arg           Stack           EBX               RDI            RDI
+; 2nd arg           Stack           ECX               RSI            RSI
+; 3rd arg           Stack           EDX               RDX            RDX
+; 4th arg           Stack           ESI               RCX            R10
+; 5th arg           Stack           EDI               R8             R8
+; 6th arg           Stack           EBP               R9
+
+MOVS
+;If the direction flag is cleared (DF = 0), the RSI register is incremented after each string operation.
+;If the direction flag is set (DF = 1), the RSI register is decremented after each string operation.
