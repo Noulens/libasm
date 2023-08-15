@@ -1,4 +1,5 @@
 ;ft_strlen
+.intel_syntax
 section .note.GNU-stack
 section .data
 section .bss

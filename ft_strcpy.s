@@ -1,4 +1,5 @@
 ;ft_strcpy(dest-arg0-rdi, src-arg1-rsi)
+.intel_syntax
 section .note.GNU-stack
 section .data
 section .bss
