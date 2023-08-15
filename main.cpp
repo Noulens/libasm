@@ -8,7 +8,8 @@
 #include <cstring>
 #include <colors.h>
 
-void check_strlen() {
+void check_strlen()
+{
 	const char *empty = "";
 	const char *hello_world = "Hello, world!";
 	const char *alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -31,7 +32,8 @@ void check_strlen() {
 	cout << endl;
 }
 
-void check_strcpy() {
+void check_strcpy()
+{
 	char buffer[27];
 	const char *empty = "";
 	const char *hello_world = "Hello, world!";
@@ -61,7 +63,8 @@ void check_strcpy() {
 	cout << endl;
 }
 
-int main() {
+int main()
+{
 	check_strlen();
 	check_strcpy();
 	return (0);
