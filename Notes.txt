@@ -1,4 +1,4 @@
-FLAGS
+INSTRUCTION FLAGS
 je  ZF=1                    Jump if	equal              Signed,	unsigned
 jne ZF=0                    Jump if	not	equal          Signed,	unsigned
 jg  ((SF XOR OF) OR ZF)	= 0 Jump if	greater            Signed
