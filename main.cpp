@@ -76,43 +76,43 @@ void check_strcmp()
 
 	cout << YELLOW << "========== FT_STRCMP ===========\n\n" << RESET;
 	cout << setw(20) << left << "string" << empty << endl;
-	cout << setw(20) << left << "cmp to" << ": " << empty2 << endl;
+	cout << setw(20) << left << "cmp to" << empty2 << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(empty, empty2) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(empty, empty2) << endl;
 	cout << endl;
 
 	cout << setw(20) << left << "string" << hello_world << endl;
-	cout << setw(20) << left << "cmp to" << ": " << hello_world2 << endl;
+	cout << setw(20) << left << "cmp to" << hello_world2 << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(hello_world, hello_world2) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(hello_world, hello_world2) << endl;
 	cout << endl;
 
 	cout << setw(20) << left << "string" << hello_world << endl;
-	cout << setw(20) << left << "cmp to" << ": " << hello_world3 << endl;
+	cout << setw(20) << left << "cmp to" << hello_world3 << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(hello_world, hello_world3) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(hello_world, hello_world3) << endl;
 	cout << endl;
 
 	cout << setw(20) << left << "string" << hello_world << endl;
-	cout << setw(20) << left << "cmp to" << ": " << hello_world4 << endl;
+	cout << setw(20) << left << "cmp to" << hello_world4 << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(hello_world, hello_world4) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(hello_world, hello_world4) << endl;
 	cout << endl;
 
 	cout << setw(20) << left << "string" << alphabet << endl;
-	cout << setw(20) << left << "cmp to" << ": " << alphabet << endl;
+	cout << setw(20) << left << "cmp to" << alphabet << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(alphabet, alphabet) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(alphabet, alphabet) << endl;
 	cout << endl;
 
 	cout << setw(20) << left << "string" << alphabet << endl;
-	cout << setw(20) << left << "cmp to" << ": " << Alphabet << endl;
+	cout << setw(20) << left << "cmp to" << Alphabet << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(alphabet, Alphabet) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(alphabet, Alphabet) << endl;
 	cout << endl;
 
 	cout << setw(20) << left << "string" << Alphabet << endl;
-	cout << setw(20) << left << "cmp to" << ": " << alphabet << endl;
+	cout << setw(20) << left << "cmp to" << alphabet << endl;
 	cout << setw(20) << left << "libc" << ": " << strcmp(Alphabet, alphabet) << endl;
 	cout << setw(20) << left << "libasm" << ": " << ft_strcmp(Alphabet, alphabet) << endl;
 	cout << endl;
