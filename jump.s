@@ -1,4 +1,5 @@
 ;jump
+section .note.GNU-stack
 section .data
 	nb1 dq 42
 	nb2 dq 41
