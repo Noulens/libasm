@@ -1,4 +1,4 @@
-SRCS	=	ft_strlen.s ft_strcpy.s
+SRCS	=	ft_strlen.s ft_strcpy.s ft_strcmp.s
 FLAG	=	-Wall -Wextra -Werror
 NAME	=	libasm.a
 TEST	=	tester
@@ -37,8 +37,8 @@ ft_strcmp.o	:	ft_strcmp.s
 main.o	:	main.s
 	nasm -f elf64 -g -F dwarf main.s -l main.lst
 
-main		:	main.o ft_strcpy.o
-	gcc -Wall -Werror -Wextra -o test.out ft_strcpy.o main.o -g -no-pie
+main		:	main.o ft_strcpy.o ft_strcmp.o
+	gcc -Wall -Werror -Wextra -o test.out ft_strcpy.o ft_strcmp.o  main.o -g -no-pie
 
 jumploop	:	jumploop.o
 	gcc -Wall -Werror -Wextra -o jumploop.out jumploop.o -g -no-pie

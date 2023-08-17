@@ -32,10 +32,12 @@
 ;main strcmp
 section .note.GNU-stack
 section .data
-	s1:	db	"Hello, world!", 0
-	s2:	db	"Hello, world!"
-	s3:	db	"Hello, world!"
-	len:	equ	$ - dest - 1
+	s1:	db	"Hellp, world!", 0
+	s2:	db	"Hello, world!", 0
+	s3:	db	"Hello, world", 0
+	s4:	db	"", 0
+	s5: db	"", 0
+	str: db	"This is the result: %d", 10, 0
 section .bss
 section .text
 	global main
@@ -45,15 +47,14 @@ main:
 	push	rbp
 	mov		rbp, rsp  ; prologue
 
-	mov		rdi, s1 ; cpy
-	mov		rsi, s2
+	mov		rdi, s1 ; cmp
+	mov		rsi, s3
 	call	ft_strcmp
-	mov		rax, 1    ; write syscall
-	mov		rcx, rdi
-	mov		rdi, 1    ; stdoutput
-	mov		rsi, rcx
-	mov		rdx, len
-	syscall
+	mov		rcx, rax
+	mov     rax,    0
+	mov     rdi,    str
+	mov     rsi,    rcx
+	call    printf
 
 	mov		rsp, rbp   ; epilogue
 	pop		rbp

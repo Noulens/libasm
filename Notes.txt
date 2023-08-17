@@ -21,3 +21,9 @@ CALLING CONVENTION
 MOVS
 ;If the direction flag is cleared (DF = 0), the RSI register is incremented after each string operation.
 ;If the direction flag is set (DF = 1), the RSI register is decremented after each string operation.
+
+HIGHER PART CLEARING
+;Copying a value in an 8-bit or 16-bit register does not clear the higher part
+;of a 64-bit register.
+;However, copying a value in a 32-bit register does clear the higher part of a
+;64-bit register.
