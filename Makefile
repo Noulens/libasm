@@ -1,4 +1,8 @@
-SRCS	=	ft_strlen.s ft_strcpy.s ft_strcmp.s
+SRCS	=	ft_strlen.s \
+			ft_strcpy.s \
+			ft_strcmp.s \
+			ft_write.s \
+			ft_read.s
 FLAG	=	-Wall -Wextra -Werror
 NAME	=	libasm.a
 TEST	=	tester
@@ -28,6 +32,12 @@ fclean	:	clean
 
 re		:	fclean all
 
+ft_read.o	:	ft_read.s
+	nasm -f elf64 -g -Fdwarf ft_read.s -l ft_read.lst
+
+ft_write.o	:	ft_write.s
+	nasm -f elf64 -g -F dwarf ft_write.s -l ft_write.lst
+
 ft_strcpy.o	:	ft_strcpy.s
 	nasm -f elf64 -g -F dwarf ft_strcpy.s -l ft_strcpy.lst
 
@@ -37,8 +47,20 @@ ft_strcmp.o	:	ft_strcmp.s
 main.o	:	main.s
 	nasm -f elf64 -g -F dwarf main.s -l main.lst
 
-main		:	main.o ft_strcpy.o ft_strcmp.o
-	gcc -Wall -Werror -Wextra -o test.out ft_strcpy.o ft_strcmp.o  main.o -g -no-pie
+main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o
+	gcc -Wall -Werror -Wextra -o test.out ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o main.o -g
+
+memory		:	memory.o
+	gcc -Wall -Werror -Wextra -o memory.out memory.o -g -no-pie
+
+memory.o	:	memory.s
+	nasm -f elf64 -g -F dwarf memory.s -l memory.lst
+
+better		:	better.o
+	gcc -Wall -Werror -Wextra -o better.out better.o -g -no-pie
+
+better.o	:	better.s
+	nasm -f elf64 -g -F dwarf better.s -l better.lst
 
 jumploop	:	jumploop.o
 	gcc -Wall -Werror -Wextra -o jumploop.out jumploop.o -g -no-pie

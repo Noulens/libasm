@@ -7,6 +7,11 @@
 #include <iomanip>
 #include <cstring>
 #include <colors.h>
+#include <errno.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
 
 void check_strlen()
 {
@@ -118,10 +123,48 @@ void check_strcmp()
 	cout << endl;
 }
 
+void	check_write()
+{
+	const char *empty = "";
+	const char *hello_world = "Hello, world!\n";
+	const char *alphabet = "abcdefghijklmnopqrstuvwxyz\n";
+	int	fd = open("test.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+
+	cout << YELLOW << "========== FT_WRITE ===========\n\n" << RESET;
+	cout << setw(20) << left << "string" << empty << endl;
+	cout << setw(20) << left << "libasm" << ": " << ft_write(1, empty, ft_strlen(empty)) << endl;
+	cout << setw(20) << left << "libc" << ": " << write(1, empty, ft_strlen(empty)) << endl;
+	cout << endl;
+
+	cout << setw(20) << left << "string" << hello_world << "in fd test.txt" << endl;
+	cout << setw(20) << left << "libasm" << ": " << ft_write(fd, hello_world, ft_strlen(hello_world)) << endl;
+	cout << setw(20) << left << "libc" << ": " << write(fd, hello_world, ft_strlen(hello_world)) << endl;
+	cout << endl;
+
+	cout << setw(20) << left << "string" << alphabet << "on stdout" << endl;
+	cout << setw(20) << left << "libasm" << ": " << ft_write(1, alphabet, ft_strlen(alphabet)) << endl;
+	cout << setw(20) << left << "libc" << ": " << write(1, alphabet, ft_strlen(alphabet)) << endl;
+	cout << endl;
+
+	cout << setw(20) << left << "MYFT ERRNO" << "9: Bad file descriptor" << endl;
+	cout << setw(20) << left << "return: " << ft_write(6, "hahaha", 5) << endl;
+	cout << setw(20) << left << "perror :" << endl;
+	perror("My ft");
+	cout << setw(20) << left << "LIBC ERRNO" << "9: Bad file descriptor" << endl;
+	cout << setw(20) << left << "return: " << write(6, "hahaha", 5) << endl;
+	cout << setw(20) << left << "perror :" << endl;
+	perror("libc ");
+}
+
 int main()
 {
 	check_strlen();
 	check_strcpy();
 	check_strcmp();
+	check_write();
+
+	// for (int i = 0; i < 10; ++i) {
+	// 	printf("  %3d: %s\n", i, strerror(i));
+	// }
 	return (0);
 }

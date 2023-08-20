@@ -27,3 +27,14 @@ HIGHER PART CLEARING
 ;of a 64-bit register.
 ;However, copying a value in a 32-bit register does clear the higher part of a
 ;64-bit register.
+
+INT NEGATIVES
+You obtain the binary representation of a negative number as follows:
+1. Write the binary of the absolute value.
+2. Take the complement (change all the 1s to 0s and the 0s to 1s).
+3. Add 1.
+
+READELF
+readelf --file-header ./memory.out
+readelf --symbols ./memory.out | grep start
+readelf --symbols ./memory.out |tail +10|sort -k 2 -r ; sorts 2nd column in rev

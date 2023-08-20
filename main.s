@@ -29,32 +29,68 @@
 ; 	mov     rdi,    0
 ; 	syscall
 
+; ;main strcmp
+; section .note.GNU-stack
+; section .data
+; 	s1:	db	"Hellp, world!", 0
+; 	s2:	db	"Hello, world!", 0
+; 	s3:	db	"Hello, world", 0
+; 	s4:	db	"", 0
+; 	s5: db	"", 0
+; 	str: db	"This is the result: %d", 10, 0
+; section .bss
+; section .text
+; 	global main
+; 	extern ft_strcmp
+; 	extern printf
+; main:
+; 	push	rbp
+; 	mov		rbp, rsp  ; prologue
+
+; 	mov		rdi, s1 ; cmp
+; 	mov		rsi, s3
+; 	call	ft_strcmp
+; 	mov		rcx, rax
+; 	mov     rax,    0
+; 	mov     rdi,    str
+; 	mov     rsi,    rcx
+; 	call    printf wrt ..plt
+
+; 	mov		rsp, rbp   ; epilogue
+; 	pop		rbp
+
+; 	mov		rax,    60 ; exit
+; 	mov		rdi,    0
+; 	syscall
+
 ;main strcmp
 section .note.GNU-stack
 section .data
 	s1:	db	"Hellp, world!", 0
 	s2:	db	"Hello, world!", 0
-	s3:	db	"Hello, world", 0
+	s3:	db	"Hello, world", 10, 0
 	s4:	db	"", 0
 	s5: db	"", 0
 	str: db	"This is the result: %d", 10, 0
 section .bss
 section .text
 	global main
-	extern ft_strcmp
+	extern ft_write
 	extern printf
 main:
 	push	rbp
 	mov		rbp, rsp  ; prologue
 
-	mov		rdi, s1 ; cmp
+	mov		rdi, 1 ; cmp
 	mov		rsi, s3
-	call	ft_strcmp
+	mov		rdx, 12
+	call	ft_write
+
 	mov		rcx, rax
-	mov     rax,    0
-	mov     rdi,    str
-	mov     rsi,    rcx
-	call    printf
+	xor		rax, rax
+	mov		rdi, str
+	mov		rsi, rcx
+	call	printf wrt ..plt
 
 	mov		rsp, rbp   ; epilogue
 	pop		rbp
