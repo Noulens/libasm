@@ -154,6 +154,120 @@ void	check_write()
 	cout << setw(20) << left << "return: " << write(6, "hahaha", 5) << endl;
 	cout << setw(20) << left << "perror :" << endl;
 	perror("libc ");
+	close(fd);
+}
+
+void	check_read()
+{
+	char buff[1000];
+	char buff2[2];
+	bzero(buff, 1000);
+	bzero(buff2, 2);
+
+	cout << YELLOW << "========== FT_READ ===========\n\n" << RESET;
+	int	fd = open("test.txt", O_RDONLY);
+	cout << BLUE << "--- My ft_read ---" << RESET << endl;
+
+	int byrd = ft_read(fd, buff, 0);
+	if (byrd == -1)
+		perror("libasm ");
+	cout << setw(20) << left << "Bytes read (0)" << ": " << byrd << endl;
+	buff[byrd] = 0;
+	cout << setw(20) << left << "Buff content" << ": " << buff << endl;
+
+	byrd = ft_read(fd, buff, 14);
+	if (byrd == -1)
+		perror("libasm ");
+	cout << setw(20) << left << "Bytes read (14)" << ": " << byrd << endl;
+	buff[byrd] = 0;
+	cout << setw(20) << left << "Buff content" << ": " << buff << endl;
+
+	byrd = ft_read(fd, buff2, 1);
+	if (byrd == -1)
+		perror("libasm ");
+	cout << setw(20) << left << "Bytes read (1)" << ": " << byrd << endl;
+	buff[byrd] = 0;
+	cout << setw(20) << left << "Buff content" << ": " << buff2 << endl;
+
+	close(fd);
+
+	cout << endl;
+
+	bzero(buff, 1000);
+	bzero(buff2, 2);
+	fd = open("test.txt", O_RDONLY);
+	cout << BLUE << "--- libc read ---" << RESET << endl;
+
+	byrd = read(fd, buff, 0);
+	if (byrd == -1)
+		perror("libc");
+	cout << setw(20) << left << "Bytes read (0)" << ": " << byrd << endl;
+	buff[byrd] = 0;
+	cout << setw(20) << left << "Buff content" << ": " << buff << endl;
+
+	byrd = read(fd, buff, 14);
+	if (byrd == -1)
+		perror("libc ");
+	cout << setw(20) << left << "Bytes read (14)" << ": " << byrd << endl;
+	buff[byrd] = 0;
+	cout << setw(20) << left << "Buff content" << ": " << buff << endl;
+
+	byrd = read(fd, buff2, 1);
+	if (byrd == -1)
+		perror("libc ");
+	cout << setw(20) << left << "Bytes read (1)" << ": " << byrd << endl;
+	buff[byrd] = 0;
+	cout << setw(20) << left << "Buff content" << ": " << buff2 << endl;
+
+	close(fd);
+
+	cout << fd << endl;
+
+	cout << setw(20) << left << "The fd has been closed" << endl;
+	byrd = ft_read(fd, buff, 14);
+	if (byrd == -1)
+		perror("libasm ");
+	byrd = read(fd, buff, 14);
+	if (byrd == -1)
+		perror("libc ");
+}
+
+void	check_strdup()
+{
+	const char *test = "";
+	const char *test2 = "this is the string";
+	char *ret = NULL;
+	char *ret2 = NULL;
+
+		cout << YELLOW << "========== FT_STRDUP ===========\n\n" << RESET;
+	ret = ft_strdup(test);
+	ret2 = strdup(test);
+	cout << setw(20) << left << "str to dup" << ": " << test << endl;
+	cout << setw(20) << left << "ft_strdup" << ": " << ret << endl;
+	cout << setw(20) << left << "strdup" << ": " << ret2 << endl;
+	free(ret);
+	free(ret2);
+	ret = NULL;
+	ret2 = NULL;
+	cout << "freed" << endl;
+
+	// char *i = NULL; // segfault
+	// ret = ft_strdup(i);
+	// ret2 = strdup(i);
+	// cout << setw(20) << left << "str to dup" << ": NULL" << test << endl;
+	// cout << setw(20) << left << "ft_strdup" << ": " << ret << endl;
+	// cout << setw(20) << left << "strdup" << ": " << ret2 << endl;
+
+	ret = ft_strdup(test2);
+	ret2 = strdup(test2);
+	cout << setw(20) << left << "str to dup" << ": " << test2 << endl;
+	cout << setw(20) << left << "ft_strdup" << ": " << ret << endl;
+	cout << setw(20) << left << "strdup" << ": " << ret2 << endl;
+	free(ret);
+	free(ret2);
+	ret = NULL;
+	ret2 = NULL;
+	cout << "freed" << endl;
 }
 
 int main()
@@ -162,7 +276,8 @@ int main()
 	check_strcpy();
 	check_strcmp();
 	check_write();
-
+	check_read();
+	check_strdup();
 	// for (int i = 0; i < 10; ++i) {
 	// 	printf("  %3d: %s\n", i, strerror(i));
 	// }

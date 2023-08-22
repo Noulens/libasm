@@ -1,3 +1,4 @@
+;ft_write
 section .note.GNU-stack
 section .data
 section .bss

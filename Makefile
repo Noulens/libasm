@@ -2,7 +2,9 @@ SRCS	=	ft_strlen.s \
 			ft_strcpy.s \
 			ft_strcmp.s \
 			ft_write.s \
-			ft_read.s
+			ft_read.s \
+			ft_strdup.s
+
 FLAG	=	-Wall -Wextra -Werror
 NAME	=	libasm.a
 TEST	=	tester
@@ -29,11 +31,15 @@ fclean	:	clean
 			rm -f *.lst
 			rm -f *.out
 			rm -f *.o
+			rm -f test.txt
 
 re		:	fclean all
 
+ft_strdup.o	:	ft_strdup.s
+	nasm -f elf64 -g -F dwarf ft_strdup.s -l dt_strdup.lst
+
 ft_read.o	:	ft_read.s
-	nasm -f elf64 -g -Fdwarf ft_read.s -l ft_read.lst
+	nasm -f elf64 -g -F dwarf ft_read.s -l ft_read.lst
 
 ft_write.o	:	ft_write.s
 	nasm -f elf64 -g -F dwarf ft_write.s -l ft_write.lst
@@ -44,11 +50,14 @@ ft_strcpy.o	:	ft_strcpy.s
 ft_strcmp.o	:	ft_strcmp.s
 	nasm -f elf64 -g -F dwarf ft_strcmp.s -l ft_strcmp.lst
 
+ft_strlen.o	:	ft_strlen.s
+	nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst
+
 main.o	:	main.s
 	nasm -f elf64 -g -F dwarf main.s -l main.lst
 
-main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o
-	gcc -Wall -Werror -Wextra -o test.out ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o main.o -g
+main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strlen.o ft_strdup.o
+	gcc -Wall -Werror -Wextra -o test.out ft_strlen.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strdup.o main.o -g
 
 memory		:	memory.o
 	gcc -Wall -Werror -Wextra -o memory.out memory.o -g -no-pie

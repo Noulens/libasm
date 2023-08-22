@@ -13,12 +13,12 @@ ft_strcpy:
 ;If the direction flag is set (DF = 1), the RSI register is decremented after each string operation.
 .loop:
 	movsb           ; For 64-bit mode move byte from address (R|E)SI to (R|E)DI.
-	cmp byte [rsi], 0
-	je  .done
-	jmp .loop
+	cmp	byte [rsi], 0
+	je		.done
+	jmp		.loop
 .done:
-	pop rdi ; restore rdi
-	mov rax, rdi
+	pop	rdi ; restore rdi
+	mov	rax, rdi
 	ret
 
 ;       as an alternative, rep can be used but it needs strlen to set ecx counter
