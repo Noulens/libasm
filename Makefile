@@ -5,22 +5,38 @@ SRCS	=	ft_strlen.s \
 			ft_read.s \
 			ft_strdup.s
 
+SRCS_B	=	ft_strlen.s \
+			ft_strcpy.s \
+			ft_strcmp.s \
+			ft_write.s \
+			ft_read.s \
+			ft_strdup.s \
+			ft_atoi_base.s
+
 FLAG	=	-Wall -Wextra -Werror
 NAME	=	libasm.a
-TEST	=	tester
+NAME_B	=	libasm.a
+TEST	=	my_test
 OBJS	=	${SRCS:.s=.o}
 
 ${NAME}	:	${OBJS}
 			ar rcs ${NAME} ${OBJS}
 			ranlib ${NAME}
 
-test	:	${NAME}
-			g++ ${FLAG} -I. libasm.h colors.h -o ${TEST} main.cpp -L. -lasm -g
+OBJS_B	=	${SRCS_B:.s=.o}
+
+all	:	${NAME}
+		g++ ${FLAG} -I. libasm.h colors.h -o ${TEST} main.cpp -L. -lasm -g
+
+bonus	:	${OBJS_B}
+			ar rcs ${NAME_B} ${OBJS_B}
+			ranlib ${NAME_B}
+			g++ -D BONUS=1 ${FLAG} -I. libasm.h colors.h -o ${TEST} main.cpp -L. -lasm -g
+			
+
 
 %.o		:	%.s
 			nasm -f elf64 $< -o $@
-
-lib		:	${NAME}
 
 clean	:
 			rm -f ${OBJS}
@@ -33,10 +49,13 @@ fclean	:	clean
 			rm -f *.o
 			rm -f test.txt
 
-re		:	fclean all
+re		:	fclean bonus
+
+ft_atoi_base.o	:	ft_atoi_base.s
+	nasm -f elf64 -g ft_atoi_base.s -F dwarf -l ft_atoi_base.lst
 
 ft_strdup.o	:	ft_strdup.s
-	nasm -f elf64 -g -F dwarf ft_strdup.s -l dt_strdup.lst
+	nasm -f elf64 -g -F dwarf ft_strdup.s -l ft_strdup.lst
 
 ft_read.o	:	ft_read.s
 	nasm -f elf64 -g -F dwarf ft_read.s -l ft_read.lst
@@ -56,8 +75,17 @@ ft_strlen.o	:	ft_strlen.s
 main.o	:	main.s
 	nasm -f elf64 -g -F dwarf main.s -l main.lst
 
-main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strlen.o ft_strdup.o
-	gcc -Wall -Werror -Wextra -o test.out ft_strlen.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strdup.o main.o -g
+main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strlen.o ft_strdup.o ft_atoi_base.o
+	gcc -g -Wall -Werror -Wextra -o test.out \
+	ft_strlen.o \
+	ft_strcpy.o \
+	ft_strcmp.o \
+	ft_write.o \
+	ft_read.o \
+	ft_strdup.o \
+	ft_atoi_base.o main.o
+
+
 
 memory		:	memory.o
 	gcc -Wall -Werror -Wextra -o memory.out memory.o -g -no-pie

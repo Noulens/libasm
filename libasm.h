@@ -15,6 +15,7 @@ int     ft_strcmp(const char *s1, const char *s2);
 ssize_t ft_write(int fd, void const *buf, size_t count);
 ssize_t ft_read(int fd, char* buff, size_t count);
 char    *ft_strdup(const char *s);
+int     ft_atoi_base(const char *str, const char *base);
 
 //c++  preprocessor directives for C linkage closed
 # ifdef __cplusplus

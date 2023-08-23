@@ -13,6 +13,10 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
 void check_strlen()
 {
 	const char *empty = "";
@@ -239,7 +243,7 @@ void	check_strdup()
 	char *ret = NULL;
 	char *ret2 = NULL;
 
-		cout << YELLOW << "========== FT_STRDUP ===========\n\n" << RESET;
+	cout << YELLOW << "========== FT_STRDUP ===========\n\n" << RESET;
 	ret = ft_strdup(test);
 	ret2 = strdup(test);
 	cout << setw(20) << left << "str to dup" << ": " << test << endl;
@@ -270,6 +274,52 @@ void	check_strdup()
 	cout << "freed" << endl;
 }
 
+void	check_atoi_base()
+{
+	cout << GREEN << "========== FT_ATOI_BASE ===========\n\n" << RESET;
+	cout << setw(20) << left << "str" << ": " << "-10000000000000000000000000000000" << endl;
+	cout << setw(20) << left << "in base" << ": " << "01" << endl;
+	cout << setw(20) << left << "expected" << ": " << -2147483648 << endl;
+	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("-10000000000000000000000000000000", "01") << endl;
+	
+	cout << endl;
+
+	cout << setw(20) << left << "str" << ": " << "   --------+-2a " << endl;
+	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
+	cout << setw(20) << left << "expected" << ": " << -42 << endl;
+	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+-2a ", "0123456789abcdef") << endl;
+	
+	cout << endl;
+
+	cout << setw(20) << left << "str" << ": " << "   \t-+-2a" << endl;
+	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
+	cout << setw(20) << left << "expected" << ": " << 42 << endl;
+	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   \t-+-2a", "0123456789abcdef") << endl;
+	
+	cout << endl;
+
+	cout << setw(20) << left << "str" << ": " << "   \t-+-101010" << endl;
+	cout << setw(20) << left << "in base" << ": " << "01" << endl;
+	cout << setw(20) << left << "expected" << ": " << 42 << endl;
+	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   \t-+-101010", "01") << endl;
+	
+	cout << endl;
+
+	cout << setw(20) << left << "str" << ": " << "   --------+- 2a" << endl;
+	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
+	cout << setw(20) << left << "expected" << ": " << 0 << endl;
+	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+- 2a", "0123456789abcdef") << endl;
+	
+	cout << endl;
+
+	cout << setw(20) << left << "str" << ": " << "   --------+-2a" << endl;
+	cout << setw(20) << left << "in base" << ": " << "0123456f789abcdef" << endl;
+	cout << setw(20) << left << "expected" << ": " << 0 << endl;
+	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+-2a", "0123456f789abcdef") << endl;
+	
+	cout << endl;
+}
+
 int main()
 {
 	check_strlen();
@@ -278,6 +328,11 @@ int main()
 	check_write();
 	check_read();
 	check_strdup();
+	if (BONUS != 0)
+	{
+		cout << NEG_GREEN << "\n**** BONUS ****" << RESET << "\n\n";
+		check_atoi_base();
+	}
 	// for (int i = 0; i < 10; ++i) {
 	// 	printf("  %3d: %s\n", i, strerror(i));
 	// }

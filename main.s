@@ -156,50 +156,82 @@
 ; 	mov	rdi, s6
 ; 	call perror wrt ..plt
 ; 	jmp next
+; section .note.GNU-stack
+; section .data
+; 	s6: db "error", 0
+; 	todup: db "All those moments will be lost in time like tears in the rain...", 0
+; 	str: db	"This is the result: %s", 10, 0
+; 	array: times 28 db 0
+; 	fd: dw 0
+; 	txt: db "test.txt", 0
+; section .bss
+; section .text
+; 	global main
+; 	extern ft_strdup
+; 	extern printf
+; 	extern perror
+; 	extern free
+; main:
+; 	push	rbp
+; 	mov		rbp, rsp  ; prologue
+
+; 	mov		rdi, todup ; read
+; 	call	ft_strdup
+; 	cmp		rax, 0
+; 	je		error
+; 	push	rax
+; 	mov		rcx, rax
+; 	xor		rax, rax
+; 	mov		rdi, str
+; 	mov		rsi, rcx
+; 	call	printf wrt ..plt
+; 	jmp		next
+
+; next:
+; 	pop		rax
+; 	mov		rdi, rax
+; 	call	free wrt ..plt
+; 	mov		rsp, rbp   ; epilogue
+; 	pop		rbp
+
+; 	mov		rax,    60 ; exit
+; 	mov		rdi,    0
+; 	syscall
+
+; error:
+; 	mov	rdi, s6
+; 	call perror wrt ..plt
+; 	jmp next
+
+;   --------+-2a ", "0123456789abcdef"
+
+;main ft_atoi_base
 section .note.GNU-stack
 section .data
-	s6: db "error", 0
-	todup: db "All those moments will be lost in time like tears in the rain...", 0
-	str: db	"This is the result: %s", 10, 0
-	array: times 28 db 0
-	fd: dw 0
-	txt: db "test.txt", 0
+	s1:	db	09, "101010", 0
+	s2:	db	"01", 0
+	str: db	"This is the result: %d", 10, 0
 section .bss
 section .text
 	global main
-	extern ft_strdup
+	extern ft_atoi_base
 	extern printf
-	extern perror
-	extern free
 main:
 	push	rbp
 	mov		rbp, rsp  ; prologue
 
-	mov		rdi, todup ; read
-	call	ft_strdup
-	cmp		rax, 0
-	je		error
-	push	rax
+	mov		rdi, s1 ; str
+	mov		rsi, s2 ; base
+	call	ft_atoi_base
 	mov		rcx, rax
-	xor		rax, rax
-	mov		rdi, str
-	mov		rsi, rcx
-	call	printf wrt ..plt
-	jmp		next
+	mov     rax,    0
+	mov     rdi,    str
+	mov     rsi,    rcx
+	call    printf wrt ..plt
 
-next:
-	pop		rax
-	mov		rdi, rax
-	call	free wrt ..plt
 	mov		rsp, rbp   ; epilogue
 	pop		rbp
 
 	mov		rax,    60 ; exit
 	mov		rdi,    0
 	syscall
-
-error:
-	mov	rdi, s6
-	call perror wrt ..plt
-	jmp next
-

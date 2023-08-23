@@ -13,8 +13,9 @@ ft_write:
 	jl	error
 	ret
 error:
-	not		rax
-	add		rax, 1 ; f = (~f) + 1
+	; not		rax
+	; add		rax, 1 ; f = (~f) + 1
+	neg		rax
 	mov		rdi, rax
 	call	__errno_location wrt ..plt
 	mov		[rax], rdi
