@@ -11,12 +11,15 @@ SRCS_B	=	ft_strlen.s \
 			ft_write.s \
 			ft_read.s \
 			ft_strdup.s \
-			ft_atoi_base.s
+			ft_atoi_base.s \
+			ft_list_push_front.s \
+			ft_list_size.s \
+			ft_list_sort.s
 
 FLAG	=	-Wall -Wextra -Werror
 NAME	=	libasm.a
-NAME_B	=	libasm.a
-TEST	=	my_test
+TEST	=	test
+TEST_B	=	b_test
 OBJS	=	${SRCS:.s=.o}
 
 ${NAME}	:	${OBJS}
@@ -25,13 +28,15 @@ ${NAME}	:	${OBJS}
 
 OBJS_B	=	${SRCS_B:.s=.o}
 
-all	:	${NAME}
-		g++ ${FLAG} -I. libasm.h colors.h -o ${TEST} main.cpp -L. -lasm -g
+all		:	${NAME}
+
+test	:	
+			g++ ${FLAG} -I. libasm.h colors.h -o ${TEST} main.cpp -L. -lasm -g
 
 bonus	:	${OBJS_B}
-			ar rcs ${NAME_B} ${OBJS_B}
-			ranlib ${NAME_B}
-			g++ -D BONUS=1 ${FLAG} -I. libasm.h colors.h -o ${TEST} main.cpp -L. -lasm -g
+			ar rcs ${NAME} ${OBJS_B}
+			ranlib ${NAME}
+			gcc ${FLAG} -I. libasm.h colors.h -o ${TEST_B} main_bonus.c -L. -lasm -g
 			
 
 
@@ -44,12 +49,18 @@ clean	:
 fclean	:	clean
 			rm -f ${NAME}
 			rm -f ${TEST}
+			rm -f ${TEST_B}
 			rm -f *.lst
 			rm -f *.out
 			rm -f *.o
 			rm -f test.txt
 
 re		:	fclean bonus
+
+.PHONY	:	re fclean bonus all test clean
+
+ft_list_push_front.o	:
+	nasm -f elf64 -g ft_list_push_front.s
 
 ft_atoi_base.o	:	ft_atoi_base.s
 	nasm -f elf64 -g ft_atoi_base.s -F dwarf -l ft_atoi_base.lst
@@ -72,65 +83,66 @@ ft_strcmp.o	:	ft_strcmp.s
 ft_strlen.o	:	ft_strlen.s
 	nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst
 
-main.o	:	main.s
-	nasm -f elf64 -g -F dwarf main.s -l main.lst
+# main.o	:	main.s
+# 	nasm -f elf64 -g -F dwarf main.s -l main.lst
 
-main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strlen.o ft_strdup.o ft_atoi_base.o
-	gcc -g -Wall -Werror -Wextra -o test.out \
-	ft_strlen.o \
-	ft_strcpy.o \
-	ft_strcmp.o \
-	ft_write.o \
-	ft_read.o \
-	ft_strdup.o \
-	ft_atoi_base.o main.o
+# main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strlen.o ft_strdup.o ft_atoi_base.o ft_list_push_front.o
+# 	gcc -g -Wall -Werror -Wextra -o test.out \
+# 	ft_strlen.o \
+# 	ft_strcpy.o \
+# 	ft_strcmp.o \
+# 	ft_write.o \
+# 	ft_read.o \
+# 	ft_strdup.o \
+# 	ft_atoi_base.o main.o \
+# 	ft_list_push_front.o
 
 
 
-memory		:	memory.o
-	gcc -Wall -Werror -Wextra -o memory.out memory.o -g -no-pie
+# memory		:	memory.o
+# 	gcc -Wall -Werror -Wextra -o memory.out memory.o -g -no-pie
 
-memory.o	:	memory.s
-	nasm -f elf64 -g -F dwarf memory.s -l memory.lst
+# memory.o	:	memory.s
+# 	nasm -f elf64 -g -F dwarf memory.s -l memory.lst
 
-better		:	better.o
-	gcc -Wall -Werror -Wextra -o better.out better.o -g -no-pie
+# better		:	better.o
+# 	gcc -Wall -Werror -Wextra -o better.out better.o -g -no-pie
 
-better.o	:	better.s
-	nasm -f elf64 -g -F dwarf better.s -l better.lst
+# better.o	:	better.s
+# 	nasm -f elf64 -g -F dwarf better.s -l better.lst
 
-jumploop	:	jumploop.o
-	gcc -Wall -Werror -Wextra -o jumploop.out jumploop.o -g -no-pie
+# jumploop	:	jumploop.o
+# 	gcc -Wall -Werror -Wextra -o jumploop.out jumploop.o -g -no-pie
 
-jumploop.o	:	jumploop.s
-	nasm -f elf64 -g -F dwarf jumploop.s -l jumploop.lst
+# jumploop.o	:	jumploop.s
+# 	nasm -f elf64 -g -F dwarf jumploop.s -l jumploop.lst
 
-jump	:	jump.o
-	gcc -Wall -Werror -Wextra -o jump.out jump.o -g -no-pie
+# jump	:	jump.o
+# 	gcc -Wall -Werror -Wextra -o jump.out jump.o -g -no-pie
 
-jump.o	:	jump.s
-	nasm -f elf64 -g -F dwarf jump.s -l jump.lst
+# jump.o	:	jump.s
+# 	nasm -f elf64 -g -F dwarf jump.s -l jump.lst
 
-move	:	move.o
-	gcc -Wall -Werror -Wextra -o move.out move.o -g -no-pie
+# move	:	move.o
+# 	gcc -Wall -Werror -Wextra -o move.out move.o -g -no-pie
 
-move.o	:	move.s
-	nasm -f elf64 -g -F dwarf move.s -l move.lst
+# move.o	:	move.s
+# 	nasm -f elf64 -g -F dwarf move.s -l move.lst
 
-alive	:	alive.o
-	gcc -Wall -Werror -Wextra -no-pie -o alive.out alive.o -g
+# alive	:	alive.o
+# 	gcc -Wall -Werror -Wextra -no-pie -o alive.out alive.o -g
 
-alive.o	:	alive.s
-	nasm -f elf64 -g -F dwarf alive.s -l alive.lst
+# alive.o	:	alive.s
+# 	nasm -f elf64 -g -F dwarf alive.s -l alive.lst
 
-print	:	print.o
-	gcc -Wall -Werror -Wextra -o print.out print.o -no-pie -g
+# print	:	print.o
+# 	gcc -Wall -Werror -Wextra -o print.out print.o -no-pie -g
 
-print.o	:	print.s
-	nasm -f elf64 -g -F dwarf print.s -l print.lst
+# print.o	:	print.s
+# 	nasm -f elf64 -g -F dwarf print.s -l print.lst
 
-hello	:	hello.o
-	gcc -Wall -Werror -Wextra -o hello.out hello.o -no-pie -g
+# hello	:	hello.o
+# 	gcc -Wall -Werror -Wextra -o hello.out hello.o -no-pie -g
 
-hello.o	:	hello.s
-	nasm -f elf64 -g -F dwarf hello.s -l hello.lst
+# hello.o	:	hello.s
+# 	nasm -f elf64 -g -F dwarf hello.s -l hello.lst

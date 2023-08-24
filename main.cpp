@@ -274,52 +274,6 @@ void	check_strdup()
 	cout << "freed" << endl;
 }
 
-void	check_atoi_base()
-{
-	cout << GREEN << "========== FT_ATOI_BASE ===========\n\n" << RESET;
-	cout << setw(20) << left << "str" << ": " << "-10000000000000000000000000000000" << endl;
-	cout << setw(20) << left << "in base" << ": " << "01" << endl;
-	cout << setw(20) << left << "expected" << ": " << -2147483648 << endl;
-	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("-10000000000000000000000000000000", "01") << endl;
-	
-	cout << endl;
-
-	cout << setw(20) << left << "str" << ": " << "   --------+-2a " << endl;
-	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
-	cout << setw(20) << left << "expected" << ": " << -42 << endl;
-	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+-2a ", "0123456789abcdef") << endl;
-	
-	cout << endl;
-
-	cout << setw(20) << left << "str" << ": " << "   \t-+-2a" << endl;
-	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
-	cout << setw(20) << left << "expected" << ": " << 42 << endl;
-	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   \t-+-2a", "0123456789abcdef") << endl;
-	
-	cout << endl;
-
-	cout << setw(20) << left << "str" << ": " << "   \t-+-101010" << endl;
-	cout << setw(20) << left << "in base" << ": " << "01" << endl;
-	cout << setw(20) << left << "expected" << ": " << 42 << endl;
-	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   \t-+-101010", "01") << endl;
-	
-	cout << endl;
-
-	cout << setw(20) << left << "str" << ": " << "   --------+- 2a" << endl;
-	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
-	cout << setw(20) << left << "expected" << ": " << 0 << endl;
-	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+- 2a", "0123456789abcdef") << endl;
-	
-	cout << endl;
-
-	cout << setw(20) << left << "str" << ": " << "   --------+-2a" << endl;
-	cout << setw(20) << left << "in base" << ": " << "0123456f789abcdef" << endl;
-	cout << setw(20) << left << "expected" << ": " << 0 << endl;
-	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+-2a", "0123456f789abcdef") << endl;
-	
-	cout << endl;
-}
-
 int main()
 {
 	check_strlen();
@@ -328,13 +282,160 @@ int main()
 	check_write();
 	check_read();
 	check_strdup();
-	if (BONUS != 0)
-	{
-		cout << NEG_GREEN << "\n**** BONUS ****" << RESET << "\n\n";
-		check_atoi_base();
-	}
 	// for (int i = 0; i < 10; ++i) {
 	// 	printf("  %3d: %s\n", i, strerror(i));
 	// }
 	return (0);
 }
+
+// BONUS CPP
+
+// #include <colors.h>
+// #include <errno.h>
+// #include <stdio.h>
+// #include <unistd.h>
+// #include <stdlib.h>
+// #include <fcntl.h>
+
+
+// void	check_atoi_base()
+// {
+// 	cout << GREEN << "========== FT_ATOI_BASE ===========\n\n" << RESET;
+// 	cout << setw(20) << left << "str" << ": " << "-10000000000000000000000000000000" << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "01" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << -2147483648 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("-10000000000000000000000000000000", "01") << endl;
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "str" << ": " << "1111111111111111111111111111111" << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "01" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << 2147483647 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("1111111111111111111111111111111", "01") << endl;
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "str" << ": " << "   --------+-2a " << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << -42 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+-2a ", "0123456789abcdef") << endl;
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "str" << ": " << "   \t-+-2a" << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << 42 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   \t-+-2a", "0123456789abcdef") << endl;
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "str" << ": " << "   \t-+-101010" << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "01" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << 42 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   \t-+-101010", "01") << endl;
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "str" << ": " << "   --------+- 2a" << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "0123456789abcdef" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << 0 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+- 2a", "0123456789abcdef") << endl;
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "str" << ": " << "   --------+-2a" << endl;
+// 	cout << setw(20) << left << "in base" << ": " << "0123456f789abcdef" << endl;
+// 	cout << setw(20) << left << "expected" << ": " << 0 << endl;
+// 	cout << setw(20) << left << "ft_atoi_base" << ": " << ft_atoi_base("   --------+-2a", "0123456f789abcdef") << endl;
+	
+// 	cout << endl;
+// }
+
+// 	void	print_all(t_list *elem)
+// {
+// 	t_list *tmp = elem;
+// 	while (tmp)
+// 	{
+// 		cout << (char *)tmp->data << endl; 
+// 		tmp = tmp->next;
+// 	}
+// }
+
+// void	check_list_push_front()
+// {
+// 	const char *str = "La phrase";
+// 	const char *str2 = "L'autre phrase";
+// 	t_list	*begin = NULL;
+
+// 	begin = new t_list;
+// 	begin->data = (void *)str;
+// 	begin->next = NULL;
+
+// 	cout << GREEN << "========== ft_list_push_front & LIST_SIZE ===========\n\n" << RESET;
+// 	cout << setw(20) << left << "list (1 elem.)" << ": " << str << endl;
+// 	print_all(begin);
+	
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "ft_list_push_front" << ": " << str2 << endl;
+// 	ft_list_push_front(&begin, (void *)str2);
+// 	cout << setw(20) << left << "list (2 elem.)" << ": " << endl;
+// 	print_all(begin);
+// 	cout << setw(20) << left << "size" << ": " << ft_list_size(begin) << endl;
+
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "ft_list_push_front" << ": " << "another sentence" << endl;
+// 	ft_list_push_front(&begin, (void *)"another sentence");
+// 	cout << setw(20) << left << "list (3 elem.)" << ": " << endl;
+// 	print_all(begin);
+// 	cout << setw(20) << left << "size" << ": " << ft_list_size(begin) << endl;
+
+// 	cout << endl;
+
+// 	typedef struct s_test
+// 	{
+// 		int			nb;
+// 		const char	*str;
+// 	} t_test;
+
+// 	t_test *t1 = new t_test;
+// 	t1->nb = 123;
+// 	t1->str = "surprise";
+
+// 	t_test t2;
+// 	t2.nb = 456;
+// 	t2.str = "another surprise";
+
+// 	t_list	*begin2 = NULL;
+// 	begin2 = new t_list;
+// 	begin2->data = (void *)t1;
+// 	begin2->next = NULL;
+
+// 	t_test *ts1 = (t_test *)begin2->data;
+// 	cout << "t1 nb: " << ts1->nb << endl;
+// 	cout << "t1 str: " << ts1->str << endl;
+// 	cout << "push front t2" << endl;
+// 	ft_list_push_front(&begin2, (void *)&t2);
+// 	ts1 = (t_test *)begin2->data;
+// 	cout << "t2 nb: " << ts1->nb << endl;
+// 	cout << "t2 str: " << ts1->str << endl;
+// 	cout << setw(20) << left << "size" << ": " << ft_list_size(begin2) << endl;
+
+// 	cout << endl;
+
+// 	cout << setw(20) << left << "size if NULL" << ": " << ft_list_size(NULL) << endl;
+
+// 	cout << endl << endl;
+// }
+
+// int main()
+// {
+// 	cout << NEG_GREEN << "\n**** BONUS ****" << RESET << "\n\n";
+// 	check_atoi_base();
+// 	check_list_push_front();
+
+// 	return (0);
+// }
+
+

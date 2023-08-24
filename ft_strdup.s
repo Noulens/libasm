@@ -23,7 +23,7 @@ malloc_time:
 	mov		rdi, rax
 	call	malloc wrt ..plt
 	cmp		rax, 0
-	je		error
+	je		finish
 
 do_the_dup:
 	pop		rdi ; get src
@@ -42,13 +42,3 @@ dup:
 
 finish:
 	ret
-
-error:
-	not		rax
-	add		rax, 1 ; f = (~f) + 1
-	mov		rdi, rax
-	call	__errno_location wrt ..plt
-	mov		[rax], rdi
-	mov		rax, 0
-	ret
-
