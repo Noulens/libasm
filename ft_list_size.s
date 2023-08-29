@@ -10,7 +10,6 @@ ft_list_size:
     jz .done
 
     ; Recursively call ft_lstsize(lst->next) and add 1
-    mov rax, rdi                 ; Copy lst pointer to rax
     mov rdi, [rdi + 8]           ; Load lst->next into rdi
     call ft_list_size              ; Call ft_lstsize recursively
     add rax, 1                   ; Add 1 to the result
