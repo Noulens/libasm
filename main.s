@@ -313,80 +313,86 @@
 ; 	syscall
 
 ;ft_list_remove_if
-section .note.GNU-stack
-section .data
-	str: db "a", 10, 0
-    str1 db "a", 10, 0
-	str2 db "c", 10, 0
-	str3: db "text: %s", 10, 0
-	str4: db "size: %d", 10, 0
+; section .note.GNU-stack
+; section .data
+; 	to_delete: db "a", 0
+; 	str: db "b", 0
+;     str1 db "g", 0
+; 	str2 db "a", 0
+; 	str3: db "text: %s", 10, 0
+; 	str4: db "size: %d", 10, 0
 
-section	.bss
-list: 
-	resq 1
-section	.text
-extern ft_list_remove_if
-extern printf
-extern ft_strcmp
-extern strcmp
-extern ft_list_push_front
-extern ft_strdup
-extern ft_list_size
-global main
+; section	.bss
+; list: 
+; 	resq 1
+; section	.text
+; extern ft_list_remove_if
+; extern printf
+; extern ft_strcmp
+; extern strcmp
+; extern ft_list_push_front
+; extern ft_strdup
+; extern ft_list_size
+; extern free
+; global main
 
-main:
-	push	rbp
-	mov		rbp, rsp  ; prologue
-; create LL
-	mov		rdi, str
-	call	ft_strdup
-	lea		rdi, [list]
-	mov		rsi, rax
-	call	ft_list_push_front
-	mov		rdi, str1
-	call	ft_strdup
-	lea		rdi, [list]
-	mov		rsi, rax
-	call	ft_list_push_front
-	mov		rdi, str2
-	call	ft_strdup
-	lea		rdi, [list]
-	mov		rsi, rax
-	call	ft_list_push_front
-; Display size
-	mov		rdi, [list]
-	call	ft_list_size
-	mov		rcx, rax
+; main:
+; 	push	rbp
+; 	mov		rbp, rsp  ; prologue
+; ; create LL
+; 	mov		rdi, str
+; 	call	ft_strdup
+; 	lea		rdi, [list]
+; 	mov		rsi, rax
+; 	call	ft_list_push_front
+; 	mov		rdi, str1
+; 	call	ft_strdup
+; 	lea		rdi, [list]
+; 	mov		rsi, rax
+; 	call	ft_list_push_front
+; 	mov		rdi, str2
+; 	call	ft_strdup
+; 	lea		rdi, [list]
+; 	mov		rsi, rax
+; 	call	ft_list_push_front
+; ; Display size
+; 	mov		rdi, [list]
+; 	call	ft_list_size
+; 	mov		rcx, rax
 
-	xor		rax, rax
-	lea		rdi, [rel str4]
-	mov		rsi, rcx
-	call	printf
-; Display data at first node
-	xor		rax, rax
-	lea		rdi, [rel str3]
-	mov		rcx, [list]
-	mov		rsi, [rcx]
-	call	printf
+; 	xor		rax, rax
+; 	lea		rdi, [rel str4]
+; 	mov		rsi, rcx
+; 	call	printf
+; ; Display data at first node
+; 	xor		rax, rax
+; 	lea		rdi, [rel str3]
+; 	mov		rcx, [list]
+; 	mov		rsi, [rcx]
+; 	call	printf
 
-; Call ft_list_remove_if
-	lea		rdi, [list]
-	mov		rsi, strcmp
-	call	ft_list_remove_if
+; ; Call ft_list_remove_if
+; 	lea		rdi, [list]
+; 	lea		rsi, [to_delete]
+; 	lea		rcx, [strcmp]
+; 	lea		rdx, [free]
+; 	call	ft_list_remove_if
 
-; Display size, duplicates removed after strcmp returns 0
-	mov		rdi, [list]
-	call	ft_list_size
-	mov		rcx, rax
+; ; Display data at first node
+; 	xor		rax, rax
+; 	lea		rdi, [rel str3]
+; 	mov		rcx, [list]
+; 	mov		rsi, [rcx]
+; 	call	printf
 
-	xor		rax, rax
-	lea		rdi, [rel str4]
-	mov		rsi, rcx
-	call	printf
+; 	xor		rax, rax
+; 	lea		rdi, [rel str4]
+; 	mov		rsi, rcx
+; 	call	printf
 
-	mov		rsp, rbp   ; epilogue
-	pop		rbp
+; 	mov		rsp, rbp   ; epilogue
+; 	pop		rbp
 
-	mov		rax,    60 ; exit
-	mov		rdi,    0
-	syscall
+; 	mov		rax,    60 ; exit
+; 	mov		rdi,    0
+; 	syscall

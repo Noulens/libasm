@@ -60,56 +60,56 @@ re		:	fclean bonus
 
 .PHONY	:	re fclean bonus all test clean main
 
-ft_list_push_front.o	:
-	nasm -f elf64 -g ft_list_push_front.s
+# ft_list_push_front.o	:
+# 	nasm -f elf64 -g ft_list_push_front.s
 
-ft_atoi_base.o	:	ft_atoi_base.s
-	nasm -f elf64 -g ft_atoi_base.s
+# ft_atoi_base.o	:	ft_atoi_base.s
+# 	nasm -f elf64 -g ft_atoi_base.s
 
-ft_strdup.o	:	ft_strdup.s
-	nasm -f elf64 -g ft_strdup.s
+# ft_strdup.o	:	ft_strdup.s
+# 	nasm -f elf64 -g ft_strdup.s
 
-ft_read.o	:	ft_read.s
-	nasm -f elf64 -g ft_read.s
+# ft_read.o	:	ft_read.s
+# 	nasm -f elf64 -g ft_read.s
 
-ft_write.o	:	ft_write.s
-	nasm -f elf64 -g ft_write.s
+# ft_write.o	:	ft_write.s
+# 	nasm -f elf64 -g ft_write.s
 
-ft_strcpy.o	:	ft_strcpy.s
-	nasm -f elf64 -g ft_strcpy.s
+# ft_strcpy.o	:	ft_strcpy.s
+# 	nasm -f elf64 -g ft_strcpy.s
 
-ft_strcmp.o	:	ft_strcmp.s
-	nasm -f elf64 -g ft_strcmp.s
+# ft_strcmp.o	:	ft_strcmp.s
+# 	nasm -f elf64 -g ft_strcmp.s
 
-ft_strlen.o	:	ft_strlen.s
-	nasm -f elf64 -g ft_strlen.s
+# ft_strlen.o	:	ft_strlen.s
+# 	nasm -f elf64 -g ft_strlen.s
 
-ft_list_size.o : ft_list_size.s
-	nasm -f elf64 -g ft_list_size.s
+# ft_list_size.o : ft_list_size.s
+# 	nasm -f elf64 -g ft_list_size.s
 
-ft_list_sort.o : ft_list_sort.s
-	nasm -f elf64 -g ft_list_sort.s
+# ft_list_sort.o : ft_list_sort.s
+# 	nasm -f elf64 -g ft_list_sort.s
 
-ft_list_remove_if.o : ft_list_remove_if.s
-	nasm -f elf64 -g ft_list_remove_if.s
+# ft_list_remove_if.o : ft_list_remove_if.s
+# 	nasm -f elf64 -g ft_list_remove_if.s
 
-main.o	:	main.s
-	nasm -f elf64 -g main.s
+# main.o	:	main.s
+# 	nasm -f elf64 -g main.s
 
-# TODO: remove no-pie
-main		:	main.o ft_list_remove_if.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_list_size.o ft_strlen.o ft_strdup.o ft_atoi_base.o ft_list_push_front.o ft_list_sort.o
-	gcc -no-pie -g -Wall -Werror -Wextra -o s.out \
-	ft_strlen.o \
-	ft_strcpy.o \
-	ft_strcmp.o \
-	ft_write.o \
-	ft_read.o \
-	ft_strdup.o \
-	ft_atoi_base.o main.o \
-	ft_list_push_front.o \
-	ft_list_size.o \
-	ft_list_sort.o \
-	ft_list_remove_if.o
+# # TODO: remove no-pie
+# main		:	main.o ft_list_remove_if.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_list_size.o ft_strlen.o ft_strdup.o ft_atoi_base.o ft_list_push_front.o ft_list_sort.o
+# 	gcc -g -Wall -Werror -Wextra -o s.out \
+# 	ft_strlen.o \
+# 	ft_strcpy.o \
+# 	ft_strcmp.o \
+# 	ft_write.o \
+# 	ft_read.o \
+# 	ft_strdup.o \
+# 	ft_atoi_base.o main.o \
+# 	ft_list_push_front.o \
+# 	ft_list_size.o \
+# 	ft_list_sort.o \
+# 	ft_list_remove_if.o
 
 
 

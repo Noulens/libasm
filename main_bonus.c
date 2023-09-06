@@ -113,6 +113,28 @@ int		main(void)
 	ft_list_sort(&begin, &cmp);
 	printf("after:\n");
 	printf_listInt(begin);
+	free(begin->next);
+	free(begin);
+
+	begin = NULL;
+	char *str = "a";
+
+	printf(YELLOW"\nFT_REMOVE\n"RESET);
+	ft_list_size(begin);
+	printf("size before push (NULL): %d\n", ft_list_size(begin));
+	ft_list_push_front(&begin, ft_strdup("a"));
+	ft_list_push_front(&begin, ft_strdup("b"));
+	ft_list_push_front(&begin, ft_strdup("a"));
+	ft_list_push_front(&begin, ft_strdup("a"));
+	ft_list_push_front(&begin, ft_strdup("g"));
+	ft_list_push_front(&begin, ft_strdup("9"));
+	ft_list_push_front(&begin, ft_strdup("q"));
+	printf_list(begin);
+	ft_list_remove_if(&begin, str, strcmp, free);
+	printf("after:\n");
+	printf_list(begin);
+
+	ft_lstclear(&begin);
 
 	return (0);
 }
