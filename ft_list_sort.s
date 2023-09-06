@@ -15,7 +15,7 @@ ft_list_sort:
 	mov		r13, [rdi]
 	cmp		r13, 0
 	je		.quit
-	lea		rbx, [rsi]
+	mov		rbx, rsi
 	jmp		.advance
 
 .advance:
@@ -61,5 +61,4 @@ ft_list_sort:
 .quit:
 	pop		r13
 	pop		r12
-	xor		rax, rax
 	ret
