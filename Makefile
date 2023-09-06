@@ -14,7 +14,8 @@ SRCS_B	=	ft_strlen.s \
 			ft_atoi_base.s \
 			ft_list_push_front.s \
 			ft_list_size.s \
-			ft_list_sort.s
+			ft_list_sort.s \
+			ft_list_remove_if.s
 
 FLAG	=	-Wall -Wextra -Werror
 NAME	=	libasm.a
@@ -57,45 +58,58 @@ fclean	:	clean
 
 re		:	fclean bonus
 
-.PHONY	:	re fclean bonus all test clean
+.PHONY	:	re fclean bonus all test clean main
 
 ft_list_push_front.o	:
 	nasm -f elf64 -g ft_list_push_front.s
 
 ft_atoi_base.o	:	ft_atoi_base.s
-	nasm -f elf64 -g ft_atoi_base.s -F dwarf -l ft_atoi_base.lst
+	nasm -f elf64 -g ft_atoi_base.s
 
 ft_strdup.o	:	ft_strdup.s
-	nasm -f elf64 -g -F dwarf ft_strdup.s -l ft_strdup.lst
+	nasm -f elf64 -g ft_strdup.s
 
 ft_read.o	:	ft_read.s
-	nasm -f elf64 -g -F dwarf ft_read.s -l ft_read.lst
+	nasm -f elf64 -g ft_read.s
 
 ft_write.o	:	ft_write.s
-	nasm -f elf64 -g -F dwarf ft_write.s -l ft_write.lst
+	nasm -f elf64 -g ft_write.s
 
 ft_strcpy.o	:	ft_strcpy.s
-	nasm -f elf64 -g -F dwarf ft_strcpy.s -l ft_strcpy.lst
+	nasm -f elf64 -g ft_strcpy.s
 
 ft_strcmp.o	:	ft_strcmp.s
-	nasm -f elf64 -g -F dwarf ft_strcmp.s -l ft_strcmp.lst
+	nasm -f elf64 -g ft_strcmp.s
 
 ft_strlen.o	:	ft_strlen.s
-	nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst
+	nasm -f elf64 -g ft_strlen.s
 
-# main.o	:	main.s
-# 	nasm -f elf64 -g -F dwarf main.s -l main.lst
+ft_list_size.o : ft_list_size.s
+	nasm -f elf64 -g ft_list_size.s
 
-# main		:	main.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_strlen.o ft_strdup.o ft_atoi_base.o ft_list_push_front.o
-# 	gcc -g -Wall -Werror -Wextra -o test.out \
-# 	ft_strlen.o \
-# 	ft_strcpy.o \
-# 	ft_strcmp.o \
-# 	ft_write.o \
-# 	ft_read.o \
-# 	ft_strdup.o \
-# 	ft_atoi_base.o main.o \
-# 	ft_list_push_front.o
+ft_list_sort.o : ft_list_sort.s
+	nasm -f elf64 -g ft_list_sort.s
+
+ft_list_remove_if.o : ft_list_remove_if.s
+	nasm -f elf64 -g ft_list_remove_if.s
+
+main.o	:	main.s
+	nasm -f elf64 -g main.s
+
+# TODO: remove no-pie
+main		:	main.o ft_list_remove_if.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_list_size.o ft_strlen.o ft_strdup.o ft_atoi_base.o ft_list_push_front.o ft_list_sort.o
+	gcc -no-pie -g -Wall -Werror -Wextra -o s.out \
+	ft_strlen.o \
+	ft_strcpy.o \
+	ft_strcmp.o \
+	ft_write.o \
+	ft_read.o \
+	ft_strdup.o \
+	ft_atoi_base.o main.o \
+	ft_list_push_front.o \
+	ft_list_size.o \
+	ft_list_sort.o \
+	ft_list_remove_if.o
 
 
 

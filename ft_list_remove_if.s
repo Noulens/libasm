@@ -1,11 +1,11 @@
-; rdi = t_list **begin, rsi = int (*cmp)(d1, d2)
+; void	ft_list_remove_if(t_list **begin_list, void *data_ref,int (*cmp)(), void (*free_fct)(void *))
 section .note.GNU-stack
 section .data
 section .bss
 section	.text
-	global	ft_list_sort
+	global	ft_list_remove_if
 
-ft_list_sort:
+ft_list_remove_if:
 	push	r12
 	push	r13
 	jmp		.check
@@ -15,7 +15,7 @@ ft_list_sort:
 	mov		r13, [rdi]
 	cmp		r13, 0
 	je		.quit
-	lea		rbx, [rsi]
+	mov		rbx, rsi
 	jmp		.advance
 
 .advance:
@@ -61,5 +61,4 @@ ft_list_sort:
 .quit:
 	pop		r13
 	pop		r12
-	xor		rax, rax
 	ret
