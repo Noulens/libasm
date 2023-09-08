@@ -96,7 +96,6 @@ re		:	fclean bonus
 # main.o	:	main.s
 # 	nasm -f elf64 -g main.s
 
-# # TODO: remove no-pie
 # main		:	main.o ft_list_remove_if.o ft_strcpy.o ft_strcmp.o ft_write.o ft_read.o ft_list_size.o ft_strlen.o ft_strdup.o ft_atoi_base.o ft_list_push_front.o ft_list_sort.o
 # 	gcc -g -Wall -Werror -Wextra -o s.out \
 # 	ft_strlen.o \

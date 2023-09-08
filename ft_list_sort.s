@@ -8,6 +8,7 @@ section	.text
 ft_list_sort:
 	push	r12
 	push	r13
+	push	rbx
 	jmp		.check
 
 .begin:
@@ -61,6 +62,7 @@ ft_list_sort:
 .quit:
 	pop		r13
 	pop		r12
+	pop		rbx
 	ret
 
 ; void	ft_list_sort(t_list **begin_list, int (*cmp)())

@@ -119,7 +119,7 @@ int		main(void)
 	begin = NULL;
 	char *str = "a";
 
-	printf(YELLOW"\nFT_REMOVE\n"RESET);
+	printf(YELLOW"\nFT_LIST_REMOVE_IF\n"RESET);
 	ft_list_size(begin);
 	printf("size before push (NULL): %d\n", ft_list_size(begin));
 	ft_list_push_front(&begin, ft_strdup("a"));
