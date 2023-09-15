@@ -44,9 +44,9 @@ void	ft_lstclear(t_list **list)
 int	cmp(int nb1, int nb2)
 {
 	if (nb1 > nb2)
-		return (-1);
-	else
 		return (1);
+	else
+		return (-1);
 }
 
 
