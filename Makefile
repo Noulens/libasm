@@ -42,7 +42,7 @@ bonus	:	${OBJS_B}
 
 
 %.o		:	%.s
-			nasm -f elf64 $< -o $@
+			nasm -f elf64 $< -o $@ -g
 
 clean	:
 			rm -f ${OBJS}

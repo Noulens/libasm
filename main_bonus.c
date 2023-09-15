@@ -52,7 +52,6 @@ int	cmp(int nb1, int nb2)
 
 int		main(void)
 {
-
 	t_list	*begin = NULL;
 	int		nb1 = 10;
 	int		nb2 = 20;
